@@ -1,0 +1,35 @@
+
+{% extends "base.html" %}
+
+{% block titulo %}Minha Biblioteca | Game Library{% endblock %}
+
+{% block conteudo %}
+
+<header class="cabecalho">
+    <div>
+        <h1>Minha biblioteca</h1>
+        <p>Todos os seus jogos organizados em um só lugar.</p>
+    </div>
+</header>
+
+<section class="secao-biblioteca">
+
+    <div class="titulo-secao">
+        <div>
+            <h2>Todos os jogos</h2>
+            <p>Gerencie sua coleção de jogos.</p>
+        </div>
+
+        <button class="botao-principal" type="button">
+            + Adicionar jogo
+        </button>
+    </div>
+
+    <div class="secao-favoritos">
+        <p>Sua biblioteca aparecerá aqui.</p>
+        <p>Em breve você poderá cadastrar, editar e organizar seus jogos.</p>
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,3 +1,6 @@
+
+/* CONFIGURAÇÕES GERAIS */
+
 * {
     margin: 0;
     padding: 0;
@@ -8,43 +11,428 @@ body {
     background-color: #101014;
     color: #ffffff;
     font-family: Arial, sans-serif;
-
     min-height: 100vh;
+}
+
+
+/* ESTRUTURA PRINCIPAL */
+
+.layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+
+/* MENU LATERAL */
+
+.menu-lateral {
+    width: 250px;
+    background-color: #17171f;
+    border-right: 1px solid #292933;
+    padding: 30px 20px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 50px;
+}
+
+.logo h2 {
+    font-size: 19px;
+}
+
+.logo-icone {
+    font-size: 27px;
+}
+
+.navegacao {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.titulo-menu {
+    color: #777783;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.link-menu {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 13px;
+    border-radius: 8px;
+
+    color: #a5a5b2;
+    text-decoration: none;
+    font-size: 14px;
+
+    transition: 0.2s;
+}
+
+.link-menu span {
+    font-size: 19px;
+}
+
+.link-menu:hover,
+.link-menu.ativo {
+    background-color: #29243e;
+    color: #a78bfa;
+}
+
+.menu-inferior {
+    margin-top: auto;
+}
+
+
+/* CONTEÚDO PRINCIPAL */
+
+.conteudo-principal {
+    flex: 1;
+    padding: 35px;
+    min-width: 0;
+}
+
+
+/* CABEÇALHO */
+
+.cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 35px;
+}
+
+.cabecalho h1 {
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.cabecalho p {
+    color: #898995;
+    font-size: 14px;
+}
+
+.acoes-cabecalho {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.campo-pesquisa {
+    background-color: #1b1b24;
+    border: 1px solid #30303c;
+    border-radius: 8px;
+    padding: 12px 15px;
+    color: white;
+    outline: none;
+    width: 230px;
+}
+
+.campo-pesquisa:focus {
+    border-color: #7655e8;
+}
+
+.perfil {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+}
+
+.avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #7655e8;
 
     display: flex;
     justify-content: center;
     align-items: center;
+
+    font-weight: bold;
 }
 
-.conteudo {
-    text-align: center;
-    padding: 30px;
+
+/* INDICADORES */
+
+.indicadores {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 45px;
 }
 
-h1 {
-    font-size: 48px;
-    margin-bottom: 15px;
+.cartao-indicador {
+    background-color: #1b1b24;
+    border: 1px solid #292933;
+    border-radius: 12px;
+    padding: 22px;
+
+    display: flex;
+    align-items: center;
+    gap: 16px;
 }
 
-p {
-    color: #aaaaaa;
-    font-size: 18px;
+.cartao-indicador p {
+    color: #92929f;
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.cartao-indicador h2 {
+    font-size: 25px;
+}
+
+.indicador-icone {
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 21px;
+}
+
+.roxo {
+    background-color: #34275b;
+}
+
+.azul {
+    background-color: #1d3c5c;
+}
+
+.verde {
+    background-color: #204b3b;
+}
+
+.amarelo {
+    background-color: #51411f;
+}
+
+
+/* TÍTULOS DAS SEÇÕES */
+
+.titulo-secao {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 25px;
 }
 
-button {
+.titulo-secao h2,
+.secao-favoritos h2 {
+    font-size: 21px;
+    margin-bottom: 7px;
+}
+
+.titulo-secao p,
+.secao-favoritos p {
+    color: #92929f;
+    font-size: 13px;
+}
+
+
+/* BOTÃO */
+
+.botao-principal {
     background-color: #7655e8;
     color: white;
-
     border: none;
     border-radius: 8px;
 
-    padding: 12px 25px;
+    padding: 12px 18px;
+    font-size: 13px;
+    font-weight: bold;
 
-    font-size: 16px;
     cursor: pointer;
+    transition: 0.2s;
 }
 
-button:hover {
+.botao-principal:hover {
     background-color: #6242cf;
+}
+
+
+/* CARTÕES DOS JOGOS */
+
+.grade-jogos {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.cartao-jogo {
+    background-color: #1b1b24;
+    border: 1px solid #292933;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: 0.2s;
+}
+
+.cartao-jogo:hover {
+    transform: translateY(-4px);
+    border-color: #7655e8;
+}
+
+.capa-jogo {
+    height: 190px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 19px;
+    letter-spacing: 1px;
+}
+
+.capa-elden {
+    background: linear-gradient(135deg, #57472c, #17130e);
+}
+
+.capa-reddead {
+    background: linear-gradient(135deg, #782f27, #1d1110);
+}
+
+.capa-godofwar {
+    background: linear-gradient(135deg, #31566a, #111b26);
+}
+
+.capa-hollow {
+    background: linear-gradient(135deg, #3e4564, #11121a);
+}
+
+.informacoes-jogo {
+    padding: 16px;
+}
+
+.informacoes-jogo h3 {
+    font-size: 15px;
+    margin-bottom: 8px;
+}
+
+.informacoes-jogo p {
+    color: #92929f;
+    font-size: 12px;
+    margin-bottom: 14px;
+}
+
+.status {
+    display: inline-block;
+    padding: 6px 9px;
+    border-radius: 5px;
+    font-size: 11px;
+}
+
+.jogando {
+    background-color: #1d3c5c;
+    color: #7bbdff;
+}
+
+.concluido {
+    background-color: #204b3b;
+    color: #76d5a9;
+}
+
+.pendente {
+    background-color: #51411f;
+    color: #e8c779;
+}
+
+
+/* FAVORITOS */
+
+.secao-favoritos {
+    margin-top: 45px;
+    padding: 25px;
+    background-color: #1b1b24;
+    border: 1px solid #292933;
+    border-radius: 12px;
+}
+
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 1100px) {
+
+    .indicadores {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grade-jogos {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+@media (max-width: 700px) {
+
+    .layout {
+        flex-direction: column;
+    }
+
+    .menu-lateral {
+        width: 100%;
+        padding: 18px;
+    }
+
+    .logo {
+        margin-bottom: 20px;
+    }
+
+    .navegacao {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .titulo-menu,
+    .menu-inferior {
+        display: none;
+    }
+
+    .conteudo-principal {
+        padding: 20px;
+    }
+
+    .cabecalho {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .acoes-cabecalho {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .campo-pesquisa {
+        width: 100%;
+    }
+
+    .indicadores {
+        grid-template-columns: 1fr;
+    }
+
+    .grade-jogos {
+        grid-template-columns: 1fr;
+    }
+
+    .titulo-secao {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 15px;
+    }
+
 }

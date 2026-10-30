@@ -1,21 +1,155 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Game Library</title>
+{% extends "base.html" %}
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
-    </head>
-    <body>
+{% block titulo %}Dashboard | Game Library{% endblock %}
 
-        <main class="conteudo">
-            <h1>Game Library</h1>
+{% block conteudo %}
 
-            <p>Sua biblioteca de jogos, organizada em um só lugar.</p>
+<!-- CABEÇALHO -->
+<header class="cabecalho">
 
-            <button>Começar</button>
-        </main>
-</body>
-</html>
+    <div>
+        <h1>Dashboard</h1>
+        <p>Bem-vindo à sua biblioteca de jogos.</p>
+    </div>
+
+    <div class="acoes-cabecalho">
+
+        <input
+            type="search"
+            placeholder="Pesquisar jogos..."
+            class="campo-pesquisa"
+        >
+
+        <div class="perfil">
+            <div class="avatar">U</div>
+            <span>Meu perfil</span>
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- INDICADORES -->
+<section class="indicadores">
+
+    <article class="cartao-indicador">
+        <div class="indicador-icone roxo">🎮</div>
+        <div>
+            <p>Total de jogos</p>
+            <h2>128</h2>
+        </div>
+    </article>
+
+    <article class="cartao-indicador">
+        <div class="indicador-icone azul">▶</div>
+        <div>
+            <p>Jogando</p>
+            <h2>12</h2>
+        </div>
+    </article>
+
+    <article class="cartao-indicador">
+        <div class="indicador-icone verde">✓</div>
+        <div>
+            <p>Concluídos</p>
+            <h2>76</h2>
+        </div>
+    </article>
+
+    <article class="cartao-indicador">
+        <div class="indicador-icone amarelo">♡</div>
+        <div>
+            <p>Favoritos</p>
+            <h2>18</h2>
+        </div>
+    </article>
+
+</section>
+
+
+<!-- JOGOS RECENTES -->
+<section class="secao-biblioteca">
+
+    <div class="titulo-secao">
+
+        <div>
+            <h2>Jogos recentes</h2>
+            <p>Alguns jogos da sua coleção.</p>
+        </div>
+
+        <a href="{{ url_for('principal.biblioteca') }}"
+           class="botao-principal">
+            Ver biblioteca
+        </a>
+
+    </div>
+
+
+    <div class="grade-jogos">
+
+        <article class="cartao-jogo">
+
+            <div class="capa-jogo capa-elden">
+                <span>ELDEN RING</span>
+            </div>
+
+            <div class="informacoes-jogo">
+                <h3>Elden Ring</h3>
+                <p>PC · RPG</p>
+                <span class="status jogando">Jogando</span>
+            </div>
+
+        </article>
+
+
+        <article class="cartao-jogo">
+
+            <div class="capa-jogo capa-reddead">
+                <span>RED DEAD REDEMPTION 2</span>
+            </div>
+
+            <div class="informacoes-jogo">
+                <h3>Red Dead Redemption 2</h3>
+                <p>PC · Ação e aventura</p>
+                <span class="status concluido">Concluído</span>
+            </div>
+
+        </article>
+
+
+        <article class="cartao-jogo">
+
+            <div class="capa-jogo capa-godofwar">
+                <span>GOD OF WAR</span>
+            </div>
+
+            <div class="informacoes-jogo">
+                <h3>God of War Ragnarök</h3>
+                <p>PlayStation · Ação</p>
+                <span class="status pendente">Não iniciado</span>
+            </div>
+
+        </article>
+
+
+        <article class="cartao-jogo">
+
+            <div class="capa-jogo capa-hollow">
+                <span>HOLLOW KNIGHT</span>
+            </div>
+
+            <div class="informacoes-jogo">
+                <h3>Hollow Knight</h3>
+                <p>PC · Metroidvania</p>
+                <span class="status concluido">Concluído</span>
+            </div>
+
+        </article>
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,51 @@
+
+{% extends "base.html" %}
+
+{% block titulo %}Estatísticas | Game Library{% endblock %}
+
+{% block conteudo %}
+
+<header class="cabecalho">
+    <div>
+        <h1>Estatísticas</h1>
+        <p>Acompanhe sua evolução como jogador.</p>
+    </div>
+</header>
+
+<section class="indicadores">
+
+    <article class="cartao-indicador">
+        <div>
+            <p>Jogos cadastrados</p>
+            <h2>0</h2>
+        </div>
+    </article>
+
+    <article class="cartao-indicador">
+        <div>
+            <p>Jogos concluídos</p>
+            <h2>0</h2>
+        </div>
+    </article>
+
+    <article class="cartao-indicador">
+        <div>
+            <p>Jogos em andamento</p>
+            <h2>0</h2>
+        </div>
+    </article>
+
+</section>
+
+<section class="secao-favoritos">
+
+    <h2>Seu progresso</h2>
+
+    <p>
+        Em breve teremos gráficos, plataformas mais utilizadas,
+        gêneros favoritos e outras informações da sua coleção.
+    </p>
+
+</section>
+
+{% endblock %}

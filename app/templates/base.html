@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block titulo %}Game Library{% endblock %}</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
+</head>
+
+<body>
+
+    <div class="layout">
+
+        <!-- MENU LATERAL -->
+        <aside class="menu-lateral">
+
+            <div class="logo">
+                <span class="logo-icone">🎮</span>
+                <h2>Game Library</h2>
+            </div>
+
+            <nav class="navegacao">
+
+                <p class="titulo-menu">MENU PRINCIPAL</p>
+
+                <a href="{{ url_for('principal.inicio') }}"
+                   class="link-menu {% if request.endpoint == 'principal.inicio' %}ativo{% endif %}">
+                    <span>⌂</span>
+                    Dashboard
+                </a>
+
+                <a href="{{ url_for('principal.biblioteca') }}"
+                   class="link-menu {% if request.endpoint == 'principal.biblioteca' %}ativo{% endif %}">
+                    <span>▣</span>
+                    Minha biblioteca
+                </a>
+
+                <a href="{{ url_for('principal.favoritos') }}"
+                   class="link-menu {% if request.endpoint == 'principal.favoritos' %}ativo{% endif %}">
+                    <span>♡</span>
+                    Favoritos
+                </a>
+
+                <a href="{{ url_for('principal.estatisticas') }}"
+                   class="link-menu {% if request.endpoint == 'principal.estatisticas' %}ativo{% endif %}">
+                    <span>▥</span>
+                    Estatísticas
+                </a>
+
+            </nav>
+
+            <div class="menu-inferior">
+
+                <a href="{{ url_for('principal.configuracoes') }}"
+                   class="link-menu {% if request.endpoint == 'principal.configuracoes' %}ativo{% endif %}">
+                    <span>⚙</span>
+                    Configurações
+                </a>
+
+            </div>
+
+        </aside>
+
+
+        <!-- CONTEÚDO DA PÁGINA -->
+        <main class="conteudo-principal">
+
+            {% block conteudo %}
+            {% endblock %}
+
+        </main>
+
+    </div>
+
+</body>
+</html>
