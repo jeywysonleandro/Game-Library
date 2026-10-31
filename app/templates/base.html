@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
 </head>
 
-<body>
+<body data-tema="escuro">
 
     <div class="layout">
 
@@ -69,12 +69,23 @@
         <!-- CONTEÚDO DA PÁGINA -->
         <main class="conteudo-principal">
 
+            <!--CABEÇALHO GLOBAL-->
+            <header class="cabecalho-global">
+
+                <button id="botao-tema" class="botao-tema" type="button">
+                     ☀️ Tema claro
+                </button>
+
+            </header>
+
             {% block conteudo %}
             {% endblock %}
 
         </main>
 
     </div>
+
+     <script src="{{ url_for('static', filename='js/tema.js') }}"></script>
 
 </body>
 </html>

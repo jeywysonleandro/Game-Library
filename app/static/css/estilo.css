@@ -1,4 +1,56 @@
 
+/* VARIÁVEIS DO TEMA ESCURO */
+
+:root {
+    /* Fundos */
+    --cor-fundo: #101014;
+    --cor-menu: #17171f;
+    --cor-cartao: #1b1b24;
+
+    /* Bordas */
+    --cor-borda: #292933;
+    --cor-borda-input: #30303c;
+
+    /* Textos */
+    --cor-texto: #ffffff;
+    --cor-texto-secundario: #92929f;
+    --cor-texto-menu: #a5a5b2;
+    --cor-texto-menu-titulo: #777783;
+
+    /* Destaques */
+    --cor-destaque: #7655e8;
+    --cor-destaque-hover: #6242cf;
+    --cor-menu-ativo: #29243e;
+    --cor-texto-ativo: #a78bfa;
+}
+
+
+/* VARIÁVEIS DO TEMA CLARO */
+
+[data-tema="claro"] {
+    /* Fundos */
+    --cor-fundo: #f5f5f9;
+    --cor-menu: #ffffff;
+    --cor-cartao: #ffffff;
+
+    /* Bordas */
+    --cor-borda: #e2e2ea;
+    --cor-borda-input: #d5d5df;
+
+    /* Textos */
+    --cor-texto: #20202a;
+    --cor-texto-secundario: #777783;
+    --cor-texto-menu: #555563;
+    --cor-texto-menu-titulo: #888895;
+
+    /* Destaques */
+    --cor-destaque: #7655e8;
+    --cor-destaque-hover: #6242cf;
+    --cor-menu-ativo: #eee9ff;
+    --cor-texto-ativo: #6945d3;
+}
+
+
 /* CONFIGURAÇÕES GERAIS */
 
 * {
@@ -8,8 +60,8 @@
 }
 
 body {
-    background-color: #101014;
-    color: #ffffff;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
     font-family: Arial, sans-serif;
     min-height: 100vh;
 }
@@ -27,8 +79,8 @@ body {
 
 .menu-lateral {
     width: 250px;
-    background-color: #17171f;
-    border-right: 1px solid #292933;
+    background-color: var(--cor-menu);
+    border-right: 1px solid var(--cor-borda);
     padding: 30px 20px;
 
     display: flex;
@@ -57,7 +109,7 @@ body {
 }
 
 .titulo-menu {
-    color: #777783;
+    color: var(--cor-texto-menu-titulo);
     font-size: 11px;
     font-weight: bold;
     letter-spacing: 1px;
@@ -72,7 +124,7 @@ body {
     padding: 13px;
     border-radius: 8px;
 
-    color: #a5a5b2;
+    color: var(--cor-texto-menu);
     text-decoration: none;
     font-size: 14px;
 
@@ -85,8 +137,8 @@ body {
 
 .link-menu:hover,
 .link-menu.ativo {
-    background-color: #29243e;
-    color: #a78bfa;
+    background-color: var(--cor-menu-ativo);
+    color: var(--cor-texto-ativo);
 }
 
 .menu-inferior {
@@ -119,7 +171,7 @@ body {
 }
 
 .cabecalho p {
-    color: #898995;
+    color: var(--cor-texto-secundario);
     font-size: 14px;
 }
 
@@ -130,17 +182,17 @@ body {
 }
 
 .campo-pesquisa {
-    background-color: #1b1b24;
-    border: 1px solid #30303c;
+    background-color: var(--cor-cartao);
+    border: 1px solid var(--cor-borda-input);
     border-radius: 8px;
     padding: 12px 15px;
-    color: white;
+    color: var(--cor-texto);
     outline: none;
     width: 230px;
 }
 
 .campo-pesquisa:focus {
-    border-color: #7655e8;
+    border-color: var(--cor-destaque);
 }
 
 .perfil {
@@ -154,7 +206,7 @@ body {
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    background-color: #7655e8;
+    background-color: var(--cor-destaque);
 
     display: flex;
     justify-content: center;
@@ -174,8 +226,8 @@ body {
 }
 
 .cartao-indicador {
-    background-color: #1b1b24;
-    border: 1px solid #292933;
+    background-color: var(--cor-cartao);
+    border: 1px solid var(--cor-borda);
     border-radius: 12px;
     padding: 22px;
 
@@ -185,7 +237,7 @@ body {
 }
 
 .cartao-indicador p {
-    color: #92929f;
+    color: var(--cor-texto-secundario);
     font-size: 13px;
     margin-bottom: 8px;
 }
@@ -240,7 +292,7 @@ body {
 
 .titulo-secao p,
 .secao-favoritos p {
-    color: #92929f;
+    color: var(--cor-texto-secundario);
     font-size: 13px;
 }
 
@@ -248,7 +300,7 @@ body {
 /* BOTÃO */
 
 .botao-principal {
-    background-color: #7655e8;
+    background-color: var(--cor-destaque);
     color: white;
     border: none;
     border-radius: 8px;
@@ -262,7 +314,7 @@ body {
 }
 
 .botao-principal:hover {
-    background-color: #6242cf;
+    background-color: var(--cor-destaque-hover);
 }
 
 
@@ -275,8 +327,8 @@ body {
 }
 
 .cartao-jogo {
-    background-color: #1b1b24;
-    border: 1px solid #292933;
+    background-color: var(--cor-cartao);
+    border: 1px solid var(--cor-borda);
     border-radius: 12px;
     overflow: hidden;
     transition: 0.2s;
@@ -284,7 +336,7 @@ body {
 
 .cartao-jogo:hover {
     transform: translateY(-4px);
-    border-color: #7655e8;
+    border-color: var(--cor-destaque);
 }
 
 .capa-jogo {
@@ -325,7 +377,7 @@ body {
 }
 
 .informacoes-jogo p {
-    color: #92929f;
+    color: var(--cor-texto-secundario);
     font-size: 12px;
     margin-bottom: 14px;
 }
@@ -358,8 +410,8 @@ body {
 .secao-favoritos {
     margin-top: 45px;
     padding: 25px;
-    background-color: #1b1b24;
-    border: 1px solid #292933;
+    background-color: var(--cor-cartao);
+    border: 1px solid var(--cor-borda);
     border-radius: 12px;
 }
 
@@ -435,4 +487,115 @@ body {
         gap: 15px;
     }
 
+}
+
+
+/* INTERRUPTOR DE TEMA */
+
+.secao-aparencia {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.informacoes-aparencia h2 {
+    margin-bottom: 8px;
+}
+
+.informacoes-aparencia p {
+    color: var(--cor-texto-secundario);
+    font-size: 13px;
+}
+
+/* BOTÃO DO INTERRUPTOR */
+
+.interruptor-tema {
+    position: relative;
+    width: 76px;
+    height: 38px;
+
+    border: none;
+    border-radius: 30px;
+
+    background-color: #353541;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    transition: background-color 0.3s ease;
+}
+
+
+/* ÍCONES DE SOL E LUA */
+
+.icone-tema {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 17px;
+    color: #555563;
+
+    pointer-events: none;
+}
+
+.icone-lua {
+    display: flex;
+}
+
+.icone-sol {
+    display: none;
+}
+
+/* CÍRCULO QUE DESLIZA */
+
+.indicador-interruptor {
+    position: absolute;
+
+    top: 4px;
+    left: 4px;
+
+    width: 30px;
+    height: 30px;
+
+    border-radius: 50%;
+
+    background-color: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: transform 0.3s ease;
+}
+
+/* TEMA CLARO ATIVADO */
+
+.interruptor-tema.ativo {
+    background-color: var(--cor-destaque);
+}
+
+.interruptor-tema.ativo .indicador-interruptor {
+    transform: translateX(38px);
+}
+
+/* TROCA DO ÍCONE NO TEMA CLARO */
+
+.interruptor-tema.ativo .icone-lua {
+    display: none;
+}
+
+.interruptor-tema.ativo .icone-sol {
+    display: flex;
 }

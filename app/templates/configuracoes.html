@@ -12,16 +12,39 @@
     </div>
 </header>
 
-<section class="secao-favoritos">
+<!-- SEÇÃO DE APARÊNCIA -->
+<section class="secao-favoritos secao-aparencia">
 
-    <h2>Aparência</h2>
+    <div class="informacoes-aparencia">
+        <h2>Aparência</h2>
 
-    <p>
-        Em breve você poderá alternar entre o tema escuro e o tema claro.
-    </p>
+        <p id="descricao-tema">
+            Escolha entre o tema claro e o tema escuro.
+        </p>
+    </div>
+
+    <!-- INTERRUPTOR DE TEMA -->
+    
+<button
+    type="button"
+    id="interruptor-tema"
+    class="interruptor-tema"
+    aria-label="Alternar tema"
+    aria-pressed="false"
+>
+    <span class="indicador-interruptor">
+
+        <span class="icone-tema icone-lua">☾</span>
+
+        <span class="icone-tema icone-sol">☀</span>
+
+    </span>
+</button>
+
 
 </section>
 
+<!-- SEÇÃO DE CONTA -->
 <section class="secao-favoritos">
 
     <h2>Conta</h2>
