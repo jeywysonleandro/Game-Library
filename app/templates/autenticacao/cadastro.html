@@ -1,0 +1,109 @@
+
+{% extends "base.html" %}
+
+{% block titulo %}Criar conta | Game Library{% endblock %}
+
+{% block conteudo %}
+
+<div class="pagina-autenticacao">
+
+    <div class="cartao-autenticacao">
+
+        <!-- LOGO E APRESENTAÇÃO -->
+
+        <div class="logo-autenticacao">
+
+            <span class="logo-icone">🎮</span>
+
+            <h1>Game Library</h1>
+
+            <p>Crie sua conta e organize sua coleção de jogos.</p>
+
+        </div>
+
+
+        <!-- FORMULÁRIO DE CADASTRO -->
+
+        <form
+            class="formulario-autenticacao"
+            method="POST"
+            action="{{ url_for('autenticacao.cadastro') }}"
+        >
+
+            <!-- CAMPO NOME -->
+
+            <div class="campo-autenticacao">
+
+                <label for="nome">Nome completo</label>
+
+                <input
+                    type="text"
+                    id="nome"
+                    name="nome"
+                    placeholder="Digite seu nome"
+                    required
+                >
+
+            </div>
+
+
+            <!-- CAMPO E-MAIL -->
+
+            <div class="campo-autenticacao">
+
+                <label for="email">E-mail</label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Digite seu e-mail"
+                    required
+                >
+
+            </div>
+
+
+            <!-- CAMPO SENHA -->
+
+            <div class="campo-autenticacao">
+
+                <label for="senha">Senha</label>
+
+                <input
+                    type="password"
+                    id="senha"
+                    name="senha"
+                    placeholder="Crie uma senha"
+                    required
+                >
+
+            </div>
+
+
+            <!-- BOTÃO CADASTRAR -->
+
+            <button type="submit" class="botao-autenticacao">
+                Criar conta
+            </button>
+
+        </form>
+
+
+        <!-- LINK PARA LOGIN -->
+
+        <div class="link-autenticacao">
+
+            Já possui uma conta?
+
+            <a href="{{ url_for('autenticacao.login') }}">
+                Entrar
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -19,5 +19,8 @@ def criar_aplicacao():
     
     from app.routes.principal import principal_bp
     aplicacao.register_blueprint(principal_bp)
+    
+    from app.routes.autenticacao import autenticacao_bp
+    aplicacao.register_blueprint(autenticacao_bp)
 
     return aplicacao

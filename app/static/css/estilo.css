@@ -22,6 +22,16 @@
     --cor-destaque-hover: #6242cf;
     --cor-menu-ativo: #29243e;
     --cor-texto-ativo: #a78bfa;
+
+    /* Mensagens */
+
+    --cor-fundo-erro: #3b1e23;
+    --cor-texto-erro: #ff9ca8;
+    --cor-borda-erro: #75343e;
+
+    --cor-fundo-sucesso: #1d3829;
+    --cor-texto-sucesso: #8be0aa;
+    --cor-borda-sucesso: #326b49;
 }
 
 
@@ -48,6 +58,16 @@
     --cor-destaque-hover: #6242cf;
     --cor-menu-ativo: #eee9ff;
     --cor-texto-ativo: #6945d3;
+
+    /* Mensagens */
+
+    --cor-fundo-erro: #fff0f0;
+    --cor-texto-erro: #b42332;
+    --cor-borda-erro: #f1b5bb;
+
+    --cor-fundo-sucesso: #edfff3;
+    --cor-texto-sucesso: #18743b;
+    --cor-borda-sucesso: #a8dfba;
 }
 
 
@@ -598,4 +618,188 @@ body {
 
 .interruptor-tema.ativo .icone-sol {
     display: flex;
+}
+
+/* ========================================= */
+/* PÁGINAS DE AUTENTICAÇÃO */
+/* ========================================= */
+
+.pagina-autenticacao {
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 30px;
+}
+
+
+/* CARTÃO DE AUTENTICAÇÃO */
+
+.cartao-autenticacao {
+    width: 100%;
+    max-width: 430px;
+
+    padding: 40px;
+
+    background-color: var(--cor-cartao);
+
+    border: 1px solid var(--cor-borda);
+    border-radius: 16px;
+}
+
+
+/* LOGO */
+
+.logo-autenticacao {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.logo-autenticacao .logo-icone {
+    font-size: 38px;
+}
+
+.logo-autenticacao h1 {
+    font-size: 24px;
+    margin-top: 10px;
+}
+
+.logo-autenticacao p {
+    color: var(--cor-texto-secundario);
+    font-size: 14px;
+    margin-top: 8px;
+}
+
+
+/* FORMULÁRIO */
+
+.formulario-autenticacao {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.campo-autenticacao {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.campo-autenticacao label {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.campo-autenticacao input {
+    width: 100%;
+
+    padding: 13px;
+
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+
+    border: 1px solid var(--cor-borda-input);
+    border-radius: 8px;
+
+    outline: none;
+}
+
+.campo-autenticacao input:focus {
+    border-color: var(--cor-destaque);
+}
+
+
+/* BOTÃO DE CADASTRO */
+
+.botao-autenticacao {
+    width: 100%;
+
+    padding: 14px;
+
+    background-color: var(--cor-destaque);
+    color: #ffffff;
+
+    border: none;
+    border-radius: 8px;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.botao-autenticacao:hover {
+    background-color: var(--cor-destaque-hover);
+}
+
+
+/* LINK PARA LOGIN */
+
+.link-autenticacao {
+    margin-top: 22px;
+
+    text-align: center;
+
+    color: var(--cor-texto-secundario);
+    font-size: 13px;
+}
+
+.link-autenticacao a {
+    color: var(--cor-texto-ativo);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.link-autenticacao a:hover {
+    text-decoration: underline;
+}
+
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 500px) {
+
+    .pagina-autenticacao {
+        padding: 15px;
+    }
+
+    .cartao-autenticacao {
+        padding: 28px 22px;
+    }
+
+}
+
+/* ========================================= */
+/* MENSAGENS DO SISTEMA */
+/* ========================================= */
+
+.mensagens-sistema {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.mensagem {
+    padding: 14px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/* MENSAGEM DE ERRO */
+
+.mensagem-erro {
+    background-color: var(--cor-fundo-erro);
+    color: var(--cor-texto-erro);
+    border: 1px solid var(--cor-borda-erro);
+}
+
+/* MENSAGEM DE SUCESSO */
+
+.mensagem-sucesso {
+    background-color: var(--cor-fundo-sucesso);
+    color: var(--cor-texto-sucesso);
+    border: 1px solid var(--cor-borda-sucesso);
 }
