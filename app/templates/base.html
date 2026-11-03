@@ -63,14 +63,26 @@
 
                 </nav>
 
-                <div class="menu-inferior">
+                
+<div class="menu-inferior">
 
-                    <a href="{{ url_for('principal.configuracoes') }}"
-                       class="link-menu {% if request.endpoint == 'principal.configuracoes' %}ativo{% endif %}">
-                        <span>⚙</span> Configurações
-                    </a>
+    <a href="{{ url_for('principal.configuracoes') }}"
+       class="link-menu {% if request.endpoint == 'principal.configuracoes' %}ativo{% endif %}">
+        <span>⚙</span> Configurações
+    </a>
 
-                </div>
+    <form action="{{ url_for('autenticacao.logout') }}"
+          method="POST"
+          class="formulario-sair">
+
+        <button type="submit" class="link-menu botao-sair">
+            <span>↪</span> Sair
+        </button>
+
+    </form>
+
+</div>
+
 
             </aside>
 

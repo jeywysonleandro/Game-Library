@@ -1,7 +1,13 @@
 
-from flask import Blueprint, render_template
-
+from flask import Blueprint, render_template, session, redirect, url_for
 principal_bp = Blueprint("principal", __name__)
+
+# PROTEGER AS PÁGINAS DO SISTEMA
+
+@principal_bp.before_request
+def verificar_login():
+    if "usuario_id" not in session:
+        return redirect(url_for("autenticacao.login"))
 
 
 # Página inicial: Dashboard

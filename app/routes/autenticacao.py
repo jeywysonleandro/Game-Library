@@ -5,7 +5,8 @@ from flask import (
     request,
     redirect,
     url_for,
-    flash
+    flash,
+    session
 )
 
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -26,6 +27,11 @@ autenticacao_bp = Blueprint(
 
 @autenticacao_bp.route("/cadastro", methods=["GET", "POST"])
 def cadastro():
+
+    # Impedir acesso ao cadastro se já estiver conectado
+    if "usuario_id" in session:
+        return redirect(url_for("principal.inicio"))
+
     # Verificar se o formulário foi enviado
     if request.method == "POST":
         nome = request.form.get("nome", "").strip()
@@ -47,6 +53,7 @@ def cadastro():
             return redirect(url_for("autenticacao.cadastro"))
 
         senha_hash = generate_password_hash(senha)
+
         banco.execute(
             """
             INSERT INTO usuarios (nome, email, senha)
@@ -66,6 +73,11 @@ def cadastro():
 
 @autenticacao_bp.route("/login", methods=["GET", "POST"])
 def login():
+
+    # Impedir acesso ao login se já estiver conectado
+    if "usuario_id" in session:
+        return redirect(url_for("principal.inicio"))
+
     # Verificar se o formulário foi enviado
     if request.method == "POST":
         email = request.form.get("email", "").strip().lower()
@@ -85,7 +97,22 @@ def login():
             flash("E-mail ou senha incorretos.", "erro")
             return redirect(url_for("autenticacao.login"))
 
+        # CRIAR A SESSÃO DO USUÁRIO
+
+        session.clear()
+        session["usuario_id"] = usuario["id"]
+        session["usuario_nome"] = usuario["nome"]
+
         flash("Login realizado com sucesso!", "sucesso")
         return redirect(url_for("principal.inicio"))
 
     return render_template("autenticacao/login.html")
+
+
+# ROTA DE LOGOUT
+
+@autenticacao_bp.route("/logout", methods=["POST"])
+def logout():
+    session.clear()
+    flash("Você saiu da sua conta.", "sucesso")
+    return redirect(url_for("autenticacao.login"))
