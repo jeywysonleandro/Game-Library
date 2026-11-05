@@ -61,6 +61,11 @@
                         <span>▥</span> Estatísticas
                     </a>
 
+                    <a href="{{ url_for('principal.perfil') }}"
+                        class="link-menu {% if request.endpoint == 'principal.perfil' %}ativo{% endif %}">
+                        <span>👤</span> Meu perfil
+                    </a>
+
                 </nav>
 
                 

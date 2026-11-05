@@ -1,0 +1,135 @@
+
+{% extends "base.html" %}
+
+{% block titulo %}Meu perfil | Game Library{% endblock %}
+
+{% block conteudo %}
+
+<section class="pagina-perfil">
+
+    <!-- CABEÇALHO DA PÁGINA -->
+
+    <div class="cabecalho-pagina cabecalho-perfil">
+
+        <div>
+            <h1>Meu perfil</h1>
+            <p>Visualize e gerencie as informações da sua conta.</p>
+        </div>
+
+        <a href="{{ url_for('principal.editar_perfil') }}" class="botao-salvar">
+            Editar perfil
+        </a>
+
+    </div>
+
+
+    <!-- INFORMAÇÕES DA CONTA -->
+
+    <div class="cartao-perfil">
+
+        <div class="perfil-identificacao">
+
+            <div class="perfil-avatar">
+                {{ usuario["nome"][0] | upper }}
+            </div>
+
+            <div>
+                <h2>{{ usuario["nome"] }}</h2>
+                <p>{{ usuario["email"] }}</p>
+            </div>
+
+        </div>
+
+
+        <!-- AÇÕES DO PERFIL -->
+
+        <div class="acoes-perfil">
+
+            <a href="{{ url_for('principal.alterar_senha') }}" class="botao-cancelar">
+                Alterar senha
+            </a>
+
+        </div>
+
+
+        <!-- INFORMAÇÕES DA CONTA -->
+
+        <div class="perfil-informacoes">
+
+            <div class="campo-perfil">
+
+                <span>Nome completo</span>
+
+                <strong>{{ usuario["nome"] }}</strong>
+
+            </div>
+
+
+            <div class="campo-perfil">
+
+                <span>E-mail</span>
+
+                <strong>{{ usuario["email"] }}</strong>
+
+            </div>
+
+
+            <!-- VISIBILIDADE DO PERFIL -->
+
+            <div class="campo-perfil">
+
+                <span>Visibilidade do perfil</span>
+
+                {% if usuario["perfil_publico"] == 1 %}
+
+                    <strong>Público</strong>
+
+                    <form
+                        method="POST"
+                        action="{{ url_for('principal.alterar_privacidade') }}"
+                    >
+
+                        <input
+                            type="hidden"
+                            name="perfil_publico"
+                            value="0"
+                        >
+
+                        <button type="submit" class="botao-cancelar">
+                            Tornar perfil privado
+                        </button>
+
+                    </form>
+
+                {% else %}
+
+                    <strong>Privado</strong>
+
+                    <form
+                        method="POST"
+                        action="{{ url_for('principal.alterar_privacidade') }}"
+                    >
+
+                        <input
+                            type="hidden"
+                            name="perfil_publico"
+                            value="1"
+                        >
+
+                        <button type="submit" class="botao-salvar">
+                            Tornar perfil público
+                        </button>
+
+                    </form>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

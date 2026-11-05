@@ -8,6 +8,8 @@ CREATE TABLE IF NOT EXISTS usuarios (
 
     senha TEXT NOT NULL,
 
+    perfil_publico INTEGER NOT NULL DEFAULT 0,
+
     data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 
 );

@@ -869,3 +869,287 @@ body {
     background-color: var(--cor-menu-ativo);
     color: var(--cor-texto-ativo);
 }
+
+
+/* ========================================= */
+/* PÁGINA DE PERFIL */
+/* ========================================= */
+
+.pagina-perfil {
+    width: 100%;
+}
+
+.cabecalho-pagina {
+    margin-bottom: 30px;
+}
+
+.cabecalho-pagina h1 {
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.cabecalho-pagina p {
+    color: var(--cor-texto-secundario);
+    font-size: 14px;
+}
+
+
+/* CARTÃO PRINCIPAL DO PERFIL */
+
+.cartao-perfil {
+    max-width: 850px;
+
+    background-color: var(--cor-cartao);
+    border: 1px solid var(--cor-borda);
+    border-radius: 12px;
+
+    padding: 30px;
+}
+
+
+/* IDENTIFICAÇÃO DO USUÁRIO */
+
+.perfil-identificacao {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.perfil-avatar {
+    width: 75px;
+    height: 75px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+    background-color: var(--cor-destaque);
+
+    color: #ffffff;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.perfil-identificacao h2 {
+    font-size: 21px;
+    margin-bottom: 7px;
+}
+
+.perfil-identificacao p {
+    color: var(--cor-texto-secundario);
+    font-size: 14px;
+}
+
+
+/* INFORMAÇÕES DA CONTA */
+
+.perfil-informacoes {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+
+    margin-top: 10px;
+}
+
+.campo-perfil {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    padding: 20px 0;
+
+    border-bottom: 1px solid var(--cor-borda);
+}
+
+.campo-perfil:last-child {
+    border-bottom: none;
+}
+
+.campo-perfil span {
+    color: var(--cor-texto-secundario);
+    font-size: 13px;
+}
+
+.campo-perfil strong {
+    color: var(--cor-texto);
+    font-size: 15px;
+    font-weight: 600;
+}
+
+
+/* RESPONSIVIDADE DO PERFIL */
+
+@media (max-width: 500px) {
+
+    .cartao-perfil {
+        padding: 20px;
+    }
+
+    .perfil-identificacao {
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .perfil-avatar {
+        width: 60px;
+        height: 60px;
+        font-size: 24px;
+    }
+
+    .perfil-identificacao h2 {
+        font-size: 18px;
+    }
+
+}
+
+/* ========================================= */
+/* FORMULÁRIO DE EDIÇÃO DO PERFIL */
+/* ========================================= */
+
+.formulario-perfil {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.campo-formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.campo-formulario label {
+    color: var(--cor-texto);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.campo-formulario input {
+    width: 100%;
+    padding: 13px 15px;
+
+    background-color: var(--cor-fundo);
+    border: 1px solid var(--cor-borda-input);
+    border-radius: 8px;
+
+    color: var(--cor-texto);
+    font-size: 14px;
+
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.campo-formulario input:focus {
+    border-color: var(--cor-destaque);
+}
+
+
+/* BOTÕES DO FORMULÁRIO */
+
+.acoes-formulario {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+
+    margin-top: 10px;
+}
+
+.botao-cancelar,
+.botao-salvar {
+    padding: 12px 20px;
+    border-radius: 8px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+    text-decoration: none;
+
+    transition: 0.2s ease;
+}
+
+.botao-cancelar {
+    background-color: transparent;
+    border: 1px solid var(--cor-borda);
+    color: var(--cor-texto);
+}
+
+.botao-cancelar:hover {
+    background-color: var(--cor-menu);
+}
+
+.botao-salvar {
+    background-color: var(--cor-destaque);
+    border: 1px solid var(--cor-destaque);
+    color: #ffffff;
+}
+
+.botao-salvar:hover {
+    opacity: 0.85;
+}
+
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 500px) {
+
+    .acoes-formulario {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+    .botao-cancelar,
+    .botao-salvar {
+        text-align: center;
+        width: 100%;
+    }
+
+}
+
+/* CABEÇALHO DA PÁGINA DE PERFIL */
+
+.cabecalho-perfil {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+@media (max-width: 500px) {
+
+    .cabecalho-perfil {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+}
+
+/* ========================================= */
+/* AÇÕES DO PERFIL */
+/* ========================================= */
+
+.acoes-perfil {
+    display: flex;
+    align-items: center;
+
+    margin-top: 20px;
+    padding-bottom: 20px;
+
+    border-bottom: 1px solid var(--cor-borda);
+}
+
+/* ========================================= */
+/* CONTROLE DE PRIVACIDADE DO PERFIL */
+/* ========================================= */
+
+.campo-perfil form {
+    margin-top: 12px;
+}
+
+.campo-perfil form button {
+    min-width: 190px;
+}

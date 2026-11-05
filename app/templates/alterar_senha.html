@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block titulo %}Alterar senha | Game Library{% endblock %}
+
+{% block conteudo %}
+
+<section class="pagina-perfil">
+
+    <!-- CABEÇALHO -->
+
+    <div class="cabecalho-pagina">
+
+        <div>
+            <h1>Alterar senha</h1>
+            <p>Atualize a senha de acesso à sua conta.</p>
+        </div>
+
+    </div>
+
+
+    <!-- FORMULÁRIO -->
+
+    <div class="cartao-perfil">
+
+        <form method="POST" class="formulario-perfil">
+
+            <div class="campo-formulario">
+
+                <label for="senha_atual">Senha atual</label>
+
+                <input
+                    type="password"
+                    id="senha_atual"
+                    name="senha_atual"
+                    placeholder="Digite sua senha atual"
+                    required
+                >
+
+            </div>
+
+
+            <div class="campo-formulario">
+
+                <label for="nova_senha">Nova senha</label>
+
+                <input
+                    type="password"
+                    id="nova_senha"
+                    name="nova_senha"
+                    placeholder="Digite sua nova senha"
+                    minlength="8"
+                    required
+                >
+
+            </div>
+
+
+            <div class="campo-formulario">
+
+                <label for="confirmar_senha">Confirmar nova senha</label>
+
+                <input
+                    type="password"
+                    id="confirmar_senha"
+                    name="confirmar_senha"
+                    placeholder="Digite novamente sua nova senha"
+                    minlength="8"
+                    required
+                >
+
+            </div>
+
+
+            <!-- BOTÕES -->
+
+            <div class="acoes-formulario">
+
+                <a href="{{ url_for('principal.perfil') }}" class="botao-cancelar">
+                    Cancelar
+                </a>
+
+                <button type="submit" class="botao-salvar">
+                    Alterar senha
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</section>
+
+{% endblock %}
