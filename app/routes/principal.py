@@ -1,3 +1,5 @@
+import json
+from datetime import datetime, timezone
 
 from flask import (
     Blueprint,
@@ -6,8 +8,11 @@ from flask import (
     redirect,
     url_for,
     request,
-    flash
+    flash,
+    jsonify
 )
+
+from app.services.igdb import buscar_jogos, obter_jogo_por_id
 
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -43,7 +48,163 @@ def inicio():
 
 @principal_bp.route("/biblioteca")
 def biblioteca():
-    return render_template("biblioteca.html")
+
+    banco = obter_banco()
+
+    jogos = banco.execute(
+        """
+        SELECT *
+        FROM jogos
+        WHERE usuario_id = ?
+        ORDER BY data_criacao DESC
+        """,
+        (session["usuario_id"],)
+    ).fetchall()
+
+    return render_template(
+        "biblioteca.html",
+        jogos=jogos
+    )
+
+
+# =========================================
+# PESQUISAR JOGOS NA IGDB
+# =========================================
+
+@principal_bp.route("/biblioteca/buscar")
+def pesquisar_jogos():
+
+    termo = request.args.get("q", "").strip()
+
+    if not termo:
+        return jsonify({"resultados": []})
+
+    try:
+        resultados = buscar_jogos(termo)
+
+        return jsonify({
+            "resultados": resultados
+        })
+
+    except RuntimeError:
+        return jsonify({
+            "erro": "Não foi possível pesquisar os jogos."
+        }), 502
+
+
+# =========================================
+# ADICIONAR JOGO À BIBLIOTECA
+# =========================================
+
+@principal_bp.route("/biblioteca/adicionar", methods=["POST"])
+def adicionar_jogo():
+
+    dados = request.get_json(silent=True) or {}
+
+    identificador = dados.get("identificador_api")
+
+    if not identificador:
+        return jsonify({
+            "erro": "Identificador do jogo não informado."
+        }), 400
+
+    try:
+        jogo = obter_jogo_por_id(identificador)
+
+        if jogo is None:
+            return jsonify({
+                "erro": "Jogo não encontrado."
+            }), 404
+
+        banco = obter_banco()
+
+        # VERIFICAR SE O JOGO JÁ ESTÁ NA BIBLIOTECA
+
+        existente = banco.execute(
+            """
+            SELECT id FROM jogos
+            WHERE usuario_id = ? AND identificador_api = ?
+            """,
+            (session["usuario_id"], str(jogo["id"]))
+        ).fetchone()
+
+        if existente:
+            return jsonify({
+                "erro": "Esse jogo já está na sua biblioteca."
+            }), 409
+
+        # OBTER A CAPA
+
+        capa = None
+
+        if jogo.get("cover"):
+            capa = "https:" + jogo["cover"]["url"].replace(
+                "t_thumb",
+                "t_cover_big"
+            )
+
+        # OBTER A DATA DE LANÇAMENTO
+
+        data_lancamento = None
+
+        if jogo.get("first_release_date"):
+            data_lancamento = datetime.fromtimestamp(
+                jogo["first_release_date"],
+                timezone.utc
+            ).date().isoformat()
+
+        # OBTER GÊNEROS E PLATAFORMAS
+
+        generos = [
+            genero["name"]
+            for genero in jogo.get("genres", [])
+        ]
+
+        plataformas = [
+            plataforma["name"]
+            for plataforma in jogo.get("platforms", [])
+        ]
+
+        # SALVAR O JOGO NO BANCO
+
+        banco.execute(
+            """
+            INSERT INTO jogos (
+                usuario_id,
+                titulo,
+                descricao,
+                capa,
+                identificador_api,
+                data_lancamento,
+                plataforma,
+                genero
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            (
+                session["usuario_id"],
+                jogo["name"],
+                jogo.get("summary"),
+                capa,
+                str(jogo["id"]),
+                data_lancamento,
+                json.dumps(plataformas, ensure_ascii=False),
+                json.dumps(generos, ensure_ascii=False)
+            )
+        )
+
+        banco.commit()
+
+        return jsonify({
+            "mensagem": "Jogo adicionado com sucesso!",
+            "titulo": jogo["name"]
+        }), 201
+
+    except RuntimeError:
+        return jsonify({
+            "erro": "Não foi possível obter os dados do jogo."
+        }), 502
+
 
 
 # =========================================

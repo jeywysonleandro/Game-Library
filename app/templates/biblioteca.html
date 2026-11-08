@@ -17,19 +17,386 @@
     <div class="titulo-secao">
         <div>
             <h2>Todos os jogos</h2>
-            <p>Gerencie sua coleção de jogos.</p>
+            <p>Pesquise jogos e encontre informações automaticamente.</p>
         </div>
-
-        <button class="botao-principal" type="button">
-            + Adicionar jogo
-        </button>
     </div>
 
-    <div class="secao-favoritos">
-        <p>Sua biblioteca aparecerá aqui.</p>
-        <p>Em breve você poderá cadastrar, editar e organizar seus jogos.</p>
+    <!-- CAMPO DE PESQUISA -->
+
+    <form id="formulario-pesquisa" class="formulario-pesquisa">
+
+        <input
+            type="search"
+            id="campo-pesquisa"
+            placeholder="Digite o nome de um jogo..."
+            autocomplete="off"
+            required
+        >
+
+        <button
+            class="botao-principal"
+            type="submit"
+            id="botao-pesquisar"
+        >
+            Pesquisar
+        </button>
+
+    </form>
+
+    <!-- MENSAGENS DA PESQUISA -->
+
+    <p id="mensagem-pesquisa" class="mensagem-pesquisa"></p>
+
+    <!-- RESULTADOS DA IGDB -->
+
+    <div id="resultados-pesquisa" class="resultados-pesquisa"></div>
+
+</section>
+
+
+<!-- ========================================= -->
+<!-- JOGOS ADICIONADOS À BIBLIOTECA -->
+<!-- ========================================= -->
+
+<section class="secao-biblioteca">
+
+    <div class="titulo-secao">
+        <div>
+            <h2>Meus jogos</h2>
+            <p>Jogos que você adicionou à sua biblioteca.</p>
+        </div>
+    </div>
+
+    <div class="resultados-pesquisa">
+
+        {% for jogo in jogos %}
+
+            <article class="cartao-resultado">
+
+                {% if jogo.capa %}
+
+                    <img
+                        src="{{ jogo.capa }}"
+                        alt="Capa de {{ jogo.titulo }}"
+                        class="capa-resultado"
+                    >
+
+                {% else %}
+
+                    <div class="capa-resultado">
+                        Capa não disponível
+                    </div>
+
+                {% endif %}
+
+                <div class="informacoes-resultado">
+
+                    <h3>{{ jogo.titulo }}</h3>
+
+                    <p>
+                        {{ jogo.descricao or "Descrição não disponível." }}
+                    </p>
+
+                    <p>
+                        <strong>Status:</strong>
+                        {{ jogo.status }}
+                    </p>
+
+                    {% if jogo.nota is not none %}
+                        <p>
+                            <strong>Nota:</strong>
+                            {{ jogo.nota }}/10
+                        </p>
+                    {% endif %}
+
+                </div>
+
+            </article>
+
+        {% else %}
+
+            <p>Você ainda não adicionou nenhum jogo à sua biblioteca.</p>
+
+        {% endfor %}
+
     </div>
 
 </section>
+
+
+<script>
+
+// =========================================
+// ELEMENTOS DA PÁGINA
+// =========================================
+
+const formulario = document.getElementById("formulario-pesquisa");
+const campoPesquisa = document.getElementById("campo-pesquisa");
+const botaoPesquisar = document.getElementById("botao-pesquisar");
+const mensagemPesquisa = document.getElementById("mensagem-pesquisa");
+const resultadosPesquisa = document.getElementById("resultados-pesquisa");
+
+
+// =========================================
+// FUNÇÃO PARA EXIBIR MENSAGENS
+// =========================================
+
+function exibirMensagem(texto, tipo = "") {
+
+    mensagemPesquisa.className = "mensagem-pesquisa";
+
+    if (tipo) {
+        mensagemPesquisa.classList.add(tipo);
+    }
+
+    mensagemPesquisa.textContent = texto;
+
+}
+
+
+// =========================================
+// REALIZAR A PESQUISA
+// =========================================
+
+formulario.addEventListener("submit", async function(evento) {
+
+    evento.preventDefault();
+
+    const termo = campoPesquisa.value.trim();
+
+    if (!termo) {
+        exibirMensagem("Digite o nome de um jogo.", "erro");
+        return;
+    }
+
+    exibirMensagem("Pesquisando jogos...");
+
+    resultadosPesquisa.replaceChildren();
+
+    botaoPesquisar.disabled = true;
+    botaoPesquisar.textContent = "Pesquisando...";
+
+    try {
+
+        const resposta = await fetch(
+            `{{ url_for('principal.pesquisar_jogos') }}?q=${encodeURIComponent(termo)}`
+        );
+
+        const dados = await resposta.json();
+
+        if (!resposta.ok) {
+            throw new Error(dados.erro || "Erro ao pesquisar jogos.");
+        }
+
+        const jogos = dados.resultados;
+
+        if (jogos.length === 0) {
+            exibirMensagem("Nenhum jogo encontrado.");
+            return;
+        }
+
+        exibirMensagem(
+            `${jogos.length} resultado(s) encontrado(s).`
+        );
+
+
+        // =========================================
+        // CRIAR OS CARTÕES DOS JOGOS
+        // =========================================
+
+        jogos.forEach(function(jogo) {
+
+            const cartao = document.createElement("article");
+            cartao.className = "cartao-resultado";
+
+
+            // =========================================
+            // CAPA DO JOGO
+            // =========================================
+
+            const imagem = document.createElement("img");
+
+            imagem.className = "capa-resultado";
+            imagem.alt = `Capa de ${jogo.name}`;
+
+            if (jogo.cover && jogo.cover.url) {
+
+                imagem.src = "https:" + jogo.cover.url.replace(
+                    "t_thumb",
+                    "t_cover_big"
+                );
+
+            } else {
+
+                imagem.alt = "Capa não disponível";
+
+            }
+
+
+            // =========================================
+            // INFORMAÇÕES DO JOGO
+            // =========================================
+
+            const informacoes = document.createElement("div");
+            informacoes.className = "informacoes-resultado";
+
+            const titulo = document.createElement("h3");
+            titulo.textContent = jogo.name;
+
+            const descricao = document.createElement("p");
+
+            descricao.textContent =
+                jogo.summary || "Descrição não disponível.";
+
+
+            // =========================================
+            // DATA DE LANÇAMENTO
+            // =========================================
+
+            const lancamento = document.createElement("p");
+
+            if (jogo.first_release_date) {
+
+                const data = new Date(
+                    jogo.first_release_date * 1000
+                );
+
+                lancamento.textContent =
+                    "Lançamento: " + data.toLocaleDateString("pt-BR", {
+                        timeZone: "UTC"
+                    });
+
+            } else {
+
+                lancamento.textContent = "Lançamento não informado.";
+
+            }
+
+
+            // =========================================
+            // GÊNEROS
+            // =========================================
+
+            const generos = document.createElement("p");
+
+            const nomesGeneros = (jogo.genres || [])
+                .map(genero => genero.name);
+
+            generos.textContent =
+                "Gêneros: " +
+                (nomesGeneros.join(", ") || "Não informado");
+
+
+            // =========================================
+            // PLATAFORMAS
+            // =========================================
+
+            const plataformas = document.createElement("p");
+
+            const nomesPlataformas = (jogo.platforms || [])
+                .map(plataforma => plataforma.name);
+
+            plataformas.textContent =
+                "Plataformas: " +
+                (nomesPlataformas.join(", ") || "Não informado");
+
+
+            // =========================================
+            // BOTÃO ADICIONAR À BIBLIOTECA
+            // =========================================
+
+            const botaoAdicionar = document.createElement("button");
+
+            botaoAdicionar.type = "button";
+            botaoAdicionar.className = "botao-principal";
+            botaoAdicionar.textContent = "+ Adicionar à biblioteca";
+
+            botaoAdicionar.addEventListener("click", async function() {
+
+                botaoAdicionar.disabled = true;
+                botaoAdicionar.textContent = "Adicionando...";
+
+                exibirMensagem("");
+
+                try {
+
+                    const resposta = await fetch(
+                        "{{ url_for('principal.adicionar_jogo') }}",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+
+                            body: JSON.stringify({
+                                identificador_api: jogo.id
+                            })
+                        }
+                    );
+
+                    const dados = await resposta.json();
+
+                    if (!resposta.ok) {
+                        throw new Error(
+                            dados.erro || "Não foi possível adicionar o jogo."
+                        );
+                    }
+
+                    botaoAdicionar.textContent = "Adicionado à biblioteca";
+
+                    exibirMensagem(dados.mensagem, "sucesso");
+
+                } catch (erro) {
+
+                    exibirMensagem(erro.message, "erro");
+
+                    botaoAdicionar.disabled = false;
+                    botaoAdicionar.textContent = "+ Adicionar à biblioteca";
+
+                }
+
+            });
+
+
+            // =========================================
+            // MONTAR O CARTÃO
+            // =========================================
+
+            informacoes.append(
+                titulo,
+                descricao,
+                lancamento,
+                generos,
+                plataformas,
+                botaoAdicionar
+            );
+
+            cartao.append(
+                imagem,
+                informacoes
+            );
+
+            resultadosPesquisa.appendChild(cartao);
+
+        });
+
+    } catch (erro) {
+
+        exibirMensagem(
+            erro.message || "Não foi possível realizar a pesquisa.",
+            "erro"
+        );
+
+    } finally {
+
+        botaoPesquisar.disabled = false;
+        botaoPesquisar.textContent = "Pesquisar";
+
+    }
+
+});
+
+</script>
 
 {% endblock %}

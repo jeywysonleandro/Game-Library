@@ -1153,3 +1153,170 @@ body {
 .campo-perfil form button {
     min-width: 190px;
 }
+
+
+/* ========================================= */
+/* PESQUISA DE JOGOS - IGDB */
+/* ========================================= */
+
+.formulario-pesquisa {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.formulario-pesquisa input {
+    flex: 1;
+    min-width: 0;
+    padding: 14px 16px;
+    background-color: var(--cor-cartao);
+    color: var(--cor-texto);
+    border: 1px solid var(--cor-borda-input);
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+}
+
+.formulario-pesquisa input:focus {
+    border-color: var(--cor-destaque);
+}
+
+.formulario-pesquisa input::placeholder {
+    color: var(--cor-texto-secundario);
+}
+
+.formulario-pesquisa button {
+    padding: 12px 22px;
+    background-color: var(--cor-destaque);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.formulario-pesquisa button:hover {
+    background-color: var(--cor-destaque-hover);
+}
+
+.formulario-pesquisa button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* MENSAGEM DA PESQUISA */
+
+.mensagem-pesquisa {
+    color: var(--cor-texto-secundario);
+    font-size: 14px;
+    margin: 20px 0;
+    padding: 12px 15px;
+    border-radius: 8px;
+    min-height: 0;
+    transition: 0.2s ease;
+}
+
+.mensagem-pesquisa.erro {
+    background-color: var(--cor-fundo-erro);
+    color: var(--cor-texto-erro);
+    border: 1px solid var(--cor-borda-erro);
+}
+
+.mensagem-pesquisa.sucesso {
+    background-color: var(--cor-fundo-sucesso);
+    color: var(--cor-texto-sucesso);
+    border: 1px solid var(--cor-borda-sucesso);
+}
+
+/* RESULTADOS DA PESQUISA */
+
+.resultados-pesquisa {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+    margin-top: 25px;
+}
+
+/* CARTÃO DO RESULTADO */
+
+.cartao-resultado {
+    background-color: var(--cor-cartao);
+    border: 1px solid var(--cor-borda);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: 0.2s ease;
+}
+
+.cartao-resultado:hover {
+    transform: translateY(-4px);
+    border-color: var(--cor-destaque);
+}
+
+/* CAPA DO JOGO */
+
+.capa-resultado {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    display: block;
+    background-color: var(--cor-menu);
+}
+
+/* INFORMAÇÕES DO JOGO */
+
+.informacoes-resultado {
+    padding: 18px;
+}
+
+.informacoes-resultado h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+.informacoes-resultado p {
+    color: var(--cor-texto-secundario);
+    font-size: 12px;
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+/* INFORMAÇÕES COMPLEMENTARES */
+
+.informacoes-resultado strong {
+    color: var(--cor-texto);
+}
+
+.informacoes-resultado button {
+    width: 100%;
+    margin-top: 12px;
+}
+
+/* RESPONSIVIDADE DA PESQUISA */
+
+@media (max-width: 1100px) {
+    .resultados-pesquisa {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 700px) {
+    .resultados-pesquisa {
+        grid-template-columns: 1fr;
+    }
+
+    .formulario-pesquisa {
+        flex-direction: column;
+    }
+
+    .formulario-pesquisa button {
+        width: 100%;
+    }
+
+    .capa-resultado {
+        height: 300px;
+    }
+}

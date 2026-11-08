@@ -1,3 +1,8 @@
+
+-- =========================================
+-- TABELA DE USUÁRIOS
+-- =========================================
+
 CREATE TABLE IF NOT EXISTS usuarios (
 
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -14,12 +19,18 @@ CREATE TABLE IF NOT EXISTS usuarios (
 
 );
 
+
+-- =========================================
 -- TABELA DE JOGOS
+-- =========================================
+
 CREATE TABLE IF NOT EXISTS jogos (
 
     id INTEGER PRIMARY KEY AUTOINCREMENT,
 
     usuario_id INTEGER NOT NULL,
+
+    -- IDENTIFICAÇÃO DO JOGO
 
     titulo TEXT NOT NULL,
 
@@ -27,11 +38,27 @@ CREATE TABLE IF NOT EXISTS jogos (
 
     capa TEXT,
 
+    identificador_api TEXT,
+
+    data_lancamento TEXT,
+
+    -- INFORMAÇÕES PERSONALIZADAS
+
+    plataforma TEXT,
+
+    genero TEXT,
+
     nota REAL,
 
-    status TEXT DEFAULT 'Quero jogar',
+    status TEXT NOT NULL DEFAULT 'Quero jogar',
 
-    favorito INTEGER DEFAULT 0,
+    favorito INTEGER NOT NULL DEFAULT 0,
+
+    data_inicio DATE,
+
+    data_conclusao DATE,
+
+    observacoes TEXT,
 
     data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
